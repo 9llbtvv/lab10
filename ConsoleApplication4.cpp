@@ -1,4 +1,4 @@
-#include "pch.h"
+п»ї#include "pch.h"
 
 using namespace System;
 
@@ -6,40 +6,40 @@ int main(array<System::String^>^ args)
 {
     Console::OutputEncoding = System::Text::Encoding::UTF8;
 
-    // 1. Введення розмірів матриці
-    Console::Write("Введіть кількість рядків (N): ");
+    // 1. Р’РІРµРґРµРЅРЅСЏ СЂРѕР·РјС–СЂС–РІ РјР°С‚СЂРёС†С–
+    Console::Write("Р’РІРµРґС–С‚СЊ РєС–Р»СЊРєС–СЃС‚СЊ СЂСЏРґРєС–РІ (N): ");
     int N = Convert::ToInt32(Console::ReadLine());
 
-    Console::Write("Введіть кількість стовпців (M): ");
+    Console::Write("Р’РІРµРґС–С‚СЊ РєС–Р»СЊРєС–СЃС‚СЊ СЃС‚РѕРІРїС†С–РІ (M): ");
     int M = Convert::ToInt32(Console::ReadLine());
 
-    // Створюємо матрицю NxM
+    // РЎС‚РІРѕСЂСЋС”РјРѕ РјР°С‚СЂРёС†СЋ NxM
     array<int, 2>^ matrix = gcnew array<int, 2>(N, M);
 
-    // Додатковий масив для зберігання мінімумів кожного рядка
-    // Це потрібно, щоб не шукати мінімум заново при кожному порівнянні
+    // Р”РѕРґР°С‚РєРѕРІРёР№ РјР°СЃРёРІ РґР»СЏ Р·Р±РµСЂС–РіР°РЅРЅСЏ РјС–РЅС–РјСѓРјС–РІ РєРѕР¶РЅРѕРіРѕ СЂСЏРґРєР°
+    // Р¦Рµ РїРѕС‚СЂС–Р±РЅРѕ, С‰РѕР± РЅРµ С€СѓРєР°С‚Рё РјС–РЅС–РјСѓРј Р·Р°РЅРѕРІРѕ РїСЂРё РєРѕР¶РЅРѕРјСѓ РїРѕСЂС–РІРЅСЏРЅРЅС–
     array<int>^ minInRow = gcnew array<int>(N);
 
-    Console::WriteLine("\nВведіть елементи матриці:");
+    Console::WriteLine("\nР’РІРµРґС–С‚СЊ РµР»РµРјРµРЅС‚Рё РјР°С‚СЂРёС†С–:");
 
     for (int i = 0; i < N; i++) {
-        int currentMin = Int32::MaxValue; // Початкове значення мінімуму
+        int currentMin = Int32::MaxValue; // РџРѕС‡Р°С‚РєРѕРІРµ Р·РЅР°С‡РµРЅРЅСЏ РјС–РЅС–РјСѓРјСѓ
 
         for (int j = 0; j < M; j++) {
             Console::Write("A[{0}][{1}] = ", i, j);
             matrix[i, j] = Convert::ToInt32(Console::ReadLine());
 
-            // Одразу шукаємо мінімум у цьому рядку
+            // РћРґСЂР°Р·Сѓ С€СѓРєР°С”РјРѕ РјС–РЅС–РјСѓРј Сѓ С†СЊРѕРјСѓ СЂСЏРґРєСѓ
             if (matrix[i, j] < currentMin) {
                 currentMin = matrix[i, j];
             }
         }
-        // Записуємо знайдений мінімум для рядка i
+        // Р—Р°РїРёСЃСѓС”РјРѕ Р·РЅР°Р№РґРµРЅРёР№ РјС–РЅС–РјСѓРј РґР»СЏ СЂСЏРґРєР° i
         minInRow[i] = currentMin;
-        Console::WriteLine("  -> Мін. елемент цього рядка: " + currentMin);
+        Console::WriteLine("  -> РњС–РЅ. РµР»РµРјРµРЅС‚ С†СЊРѕРіРѕ СЂСЏРґРєР°: " + currentMin);
     }
 
-    Console::WriteLine("\n--- Початкова матриця ---");
+    Console::WriteLine("\n--- РџРѕС‡Р°С‚РєРѕРІР° РјР°С‚СЂРёС†СЏ ---");
     for (int i = 0; i < N; i++) {
         for (int j = 0; j < M; j++) {
             Console::Write("{0, 5}", matrix[i, j]);
@@ -47,18 +47,18 @@ int main(array<System::String^>^ args)
         Console::WriteLine();
     }
 
-    // Сортування рядків
+    // РЎРѕСЂС‚СѓРІР°РЅРЅСЏ СЂСЏРґРєС–РІ
     for (int i = 0; i < N - 1; i++) {
         for (int j = 0; j < N - i - 1; j++) {
 
             if (minInRow[j] > minInRow[j + 1]) {
 
-                // А. Міняємо значення в масиві мінімумів
+                // Рђ. РњС–РЅСЏС”РјРѕ Р·РЅР°С‡РµРЅРЅСЏ РІ РјР°СЃРёРІС– РјС–РЅС–РјСѓРјС–РІ
                 int tempMin = minInRow[j];
                 minInRow[j] = minInRow[j + 1];
                 minInRow[j + 1] = tempMin;
 
-                // Б. Міняємо місцями САМІ РЯДКИ в матриці (поелементно)
+                // Р‘. РњС–РЅСЏС”РјРѕ РјС–СЃС†СЏРјРё РЎРђРњР† Р РЇР”РљР РІ РјР°С‚СЂРёС†С– (РїРѕРµР»РµРјРµРЅС‚РЅРѕ)
                 for (int k = 0; k < M; k++) {
                     int tempVal = matrix[j, k];
                     matrix[j, k] = matrix[j + 1, k];
@@ -68,14 +68,14 @@ int main(array<System::String^>^ args)
         }
     }
 
-    // 4. Виведення результату
-    Console::WriteLine("\n Відсортована матриця");
+    // 4. Р’РёРІРµРґРµРЅРЅСЏ СЂРµР·СѓР»СЊС‚Р°С‚Сѓ
+    Console::WriteLine("\n Р’С–РґСЃРѕСЂС‚РѕРІР°РЅР° РјР°С‚СЂРёС†СЏ");
     for (int i = 0; i < N; i++) {
         for (int j = 0; j < M; j++) {
             Console::Write("{0, 5}", matrix[i, j]);
         }
-        // Додатково виведемо мінімум, щоб було видно, що сортування правильне
-        Console::WriteLine("   (мін: {0})", minInRow[i]);
+        // Р”РѕРґР°С‚РєРѕРІРѕ РІРёРІРµРґРµРјРѕ РјС–РЅС–РјСѓРј, С‰РѕР± Р±СѓР»Рѕ РІРёРґРЅРѕ, С‰Рѕ СЃРѕСЂС‚СѓРІР°РЅРЅСЏ РїСЂР°РІРёР»СЊРЅРµ
+        Console::WriteLine("   (РјС–РЅ: {0})", minInRow[i]);
     }
 
     Console::ReadLine();
