@@ -1,4 +1,4 @@
-#include "pch.h"
+п»ї#include "pch.h"
 
 using namespace System;
 
@@ -7,7 +7,7 @@ int main(array<System::String^>^ args)
     Console::OutputEncoding = System::Text::Encoding::UTF8;
     Console::InputEncoding = System::Text::Encoding::UTF8;
 
-    Console::Write("Введіть вихідний рядок: ");
+    Console::Write("Р’РІРµРґС–С‚СЊ РІРёС…С–РґРЅРёР№ СЂСЏРґРѕРє: ");
     String^ originalString = Console::ReadLine();
 
     array<Char>^ charArray = originalString->ToCharArray();
@@ -16,7 +16,7 @@ int main(array<System::String^>^ args)
 
     String^ reversedString = gcnew String(charArray);
 
-    Console::WriteLine("\nОтриманий новий рядок:");
+    Console::WriteLine("\nРћС‚СЂРёРјР°РЅРёР№ РЅРѕРІРёР№ СЂСЏРґРѕРє:");
     Console::WriteLine(reversedString);
 
     Console::ReadLine();
